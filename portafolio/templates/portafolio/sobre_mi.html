@@ -1,0 +1,22 @@
+{% extends 'portafolio/base.html' %}
+{% block titulo %}Sobre mí · Kenji{% endblock %}
+{% block contenido %}
+<section class="seccion sobre">
+  <div class="sobre__foto">
+    {% if retrato %}
+      <img src="{{ retrato.imagen.url }}" alt="Retrato de Kenji">
+    {% else %}
+      <div class="sobre__vacio">Tu retrato aquí</div>
+    {% endif %}
+  </div>
+  <div class="sobre__texto">
+    <p class="antetitulo">Sobre mí</p>
+    <h1>Hola, soy Kenji.</h1>
+    <!-- ✏️ Cambia estos párrafos por tu propia historia -->
+    <p>Soy fotógrafo y me interesa capturar las cosas tal como son: sin poses forzadas, sin filtros de más. De ahí viene el nombre <em>inraw</em>.</p>
+    <p>Trabajo en retrato, fotografía de calle y eventos. Me gusta conocer a las personas antes de fotografiarlas, porque las mejores imágenes salen cuando hay confianza.</p>
+    <p>Si tienes un proyecto en mente, conversemos.</p>
+    <a class="boton" href="{% url 'contacto' %}">Escríbeme</a>
+  </div>
+</section>
+{% endblock %}

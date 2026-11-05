@@ -1,0 +1,22 @@
+{% extends 'portafolio/base.html' %}
+{% block titulo %}Contacto · Kenji{% endblock %}
+{% block contenido %}
+<section class="seccion contacto">
+  <h1>Contacto</h1>
+  <p class="bajada">¿Una sesión, un evento o una idea? Escríbeme.</p>
+
+  {% for m in messages %}<p class="aviso">{{ m }}</p>{% endfor %}
+
+  <form method="post" class="formulario" novalidate>
+    {% csrf_token %}
+    {% for campo in form %}
+      <label>
+        <span>{{ campo.label }}</span>
+        {{ campo }}
+        {% for e in campo.errors %}<small class="error">{{ e }}</small>{% endfor %}
+      </label>
+    {% endfor %}
+    <button class="boton" type="submit">Enviar mensaje</button>
+  </form>
+</section>
+{% endblock %}

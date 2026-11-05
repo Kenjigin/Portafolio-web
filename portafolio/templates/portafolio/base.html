@@ -1,0 +1,41 @@
+{% load static %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Kenji · Fotografía{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'portafolio/css/estilos.css' %}">
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="{% url 'inicio' %}">Kenji<span>.inraw</span></a>
+    <nav>
+      <a href="{% url 'inicio' %}" {% if request.resolver_match.url_name == 'inicio' %}class="activo"{% endif %}>Inicio</a>
+      <a href="{% url 'galeria' %}" {% if 'galeria' in request.resolver_match.url_name %}class="activo"{% endif %}>Portafolio</a>
+      <a href="{% url 'sobre_mi' %}" {% if request.resolver_match.url_name == 'sobre_mi' %}class="activo"{% endif %}>Sobre mí</a>
+      <a href="{% url 'contacto' %}" {% if request.resolver_match.url_name == 'contacto' %}class="activo"{% endif %}>Contacto</a>
+    </nav>
+  </header>
+
+  <main>{% block contenido %}{% endblock %}</main>
+
+  <footer class="pie">
+    <p>© {% now "Y" %} Kenji.inraw · Fotografía</p>
+    <a href="https://instagram.com/kenji.inraw" target="_blank" rel="noopener">Instagram</a>
+  </footer>
+
+  <!-- Visor de fotos en grande -->
+  <div class="visor" id="visor" hidden>
+    <button class="visor__cerrar" aria-label="Cerrar">×</button>
+    <button class="visor__nav visor__ant" aria-label="Anterior">‹</button>
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="visor__nav visor__sig" aria-label="Siguiente">›</button>
+  </div>
+  <script src="{% static 'portafolio/js/visor.js' %}"></script>
+</body>
+</html>

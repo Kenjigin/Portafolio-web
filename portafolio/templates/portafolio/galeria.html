@@ -1,0 +1,28 @@
+{% extends 'portafolio/base.html' %}
+{% block titulo %}Portafolio · Kenji{% endblock %}
+{% block contenido %}
+<section class="seccion">
+  <h1>Portafolio</h1>
+  {% if categorias %}
+    <div class="filtros">
+      <a href="{% url 'galeria' %}" {% if not categoria_activa %}class="activo"{% endif %}>Todas</a>
+      {% for c in categorias %}
+        <a href="{% url 'galeria_categoria' c.slug %}" {% if categoria_activa == c %}class="activo"{% endif %}>{{ c.nombre }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if fotos %}
+    <div class="grilla">
+      {% for foto in fotos %}
+        <figure class="foto">
+          <img src="{{ foto.imagen.url }}" alt="{{ foto.titulo }}" loading="lazy" data-visor data-descripcion="{{ foto.descripcion }}">
+          <figcaption>{{ foto.titulo }}{% if foto.categoria %} · <span>{{ foto.categoria }}</span>{% endif %}</figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="vacio">Todavía no hay fotos aquí.</p>
+  {% endif %}
+</section>
+{% endblock %}

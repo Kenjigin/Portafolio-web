@@ -1,0 +1,28 @@
+{% extends 'portafolio/base.html' %}
+{% block contenido %}
+<section class="portada">
+  <p class="antetitulo">Fotografía</p>
+  <h1>Imágenes en bruto,<br>historias reales.</h1>
+  <p class="bajada">Retrato, calle y momentos que no se repiten.</p>
+  <div class="acciones">
+    <a class="boton" href="{% url 'galeria' %}">Ver portafolio</a>
+    <a class="boton boton--claro" href="{% url 'contacto' %}">Trabajemos juntos</a>
+  </div>
+</section>
+
+<section class="seccion">
+  <h2>Destacadas</h2>
+  {% if destacadas %}
+    <div class="grilla">
+      {% for foto in destacadas %}
+        <figure class="foto">
+          <img src="{{ foto.imagen.url }}" alt="{{ foto.titulo }}" loading="lazy" data-visor data-descripcion="{{ foto.descripcion }}">
+          <figcaption>{{ foto.titulo }}</figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="vacio">Aún no hay fotos destacadas. Súbelas desde <a href="/admin/">el panel de administración</a> y marca «Destacada».</p>
+  {% endif %}
+</section>
+{% endblock %}
